@@ -24,6 +24,7 @@ Add the plugin to your webpack and config as follows:
             new MinifyHtmlWebpackPlugin({
                 src: './storage/framework/views',
                 dest: './storage/framework/views',
+                ignoreFileRegex: /\.(gitignore|php)$/,
                 rules: {
                     collapseWhitespace: true,
                     removeAttributeQuotes: true,
@@ -48,6 +49,7 @@ Paste below snippets into mix.js file.
             new MinifyHtmlWebpackPlugin({
                 src: './storage/framework/views',
                 dest: './storage/framework/views',
+                ignoreFileRegex: /\.(gitignore)$/,
                 rules: {
                     collapseWhitespace: true,
                     removeAttributeQuotes: true,
@@ -65,8 +67,9 @@ Configuration
 You can pass configuration options to `MinifyHtmlWebpackPlugin`. Each configuration has following items:
 
 - `dir`: Optional. Base dir to find the files, if not provided, use the root of webpack context.
-- `src`: Required. Files in `src` to minify.
-- `dest`: Optional. Copy minified HTML contents Files in `dest`, if not provided, paste into src directory.
+- `src`: Required. source directory path.
+- `dest`: Optional. destination directory path. Paste minified HTML contents from `src` directory files into `dest` directory, if not provided, paste into `src` directory.
+- `ignoreFileRegex`: Optional. Regex to ingnore files in the src directory, if not provided, will minimize all files in src directory.`
 - `rules`: Required. See the [html-minifer docs](https://github.com/kangax/html-minifier) for all available options.
 
 # License
