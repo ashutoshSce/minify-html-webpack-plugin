@@ -1,0 +1,45 @@
+{
+  "name": "minify-html-webpack-plugin",
+  "version": "0.0.1",
+  "description": "A webpack plugin to minify html file(s) after building",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "html-minifier": "^3.5.20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashutoshSce/minify-html-webpack-plugin.git"
+  },
+  "files": [
+    "index.js"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">= 6.0"
+  },
+  "keywords": [
+    "minify",
+    "html",
+    "webpack",
+    "plugin",
+    "file",
+    "mix",
+    "php",
+    "laravel",
+    "htmlmin",
+    "minification",
+    "minifier",
+    "minify"
+  ],
+  "author": {
+    "name": "Ashutosh Kumar Jha",
+    "email": "ashutosh.sce@hotmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ashutoshSce/minify-html-webpack-plugin/issues"
+  },
+  "homepage": "https://github.com/ashutoshSce/minify-html-webpack-plugin#readme"
+}
