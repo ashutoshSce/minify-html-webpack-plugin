@@ -17,7 +17,8 @@ class MinifyHtmlWebpackPlugin {
             const root = compilation.options.context;
             const dir = this.options.dir || root;
             const dest = this.options.dest || this.options.src;
-            const pattern = this.options.ignoreFileRegex || /''/;
+            const pattern = this.options.ignoreFileNameRegex || /''/;
+            const contentPattern = this.options.ignoreFileContentsRegex || /''/;
 
             const srcDir = path.resolve(dir, this.options.src);
             const destDir = path.resolve(dir, dest);
@@ -27,9 +28,11 @@ class MinifyHtmlWebpackPlugin {
                     if (!pattern.test(file)) {
                         let inputFile = path.resolve(srcDir, file);
                         let source = fs.readFileSync(inputFile, 'utf8');
-                        let result = minifier(source, this.options.rules);
-                        let outputFile = path.resolve(destDir, file);
-                        fs.writeFileSync(outputFile, result);
+                        if (!contentPattern.test(source)) {
+                            let result = minifier(source, this.options.rules);
+                            let outputFile = path.resolve(destDir, file);
+                            fs.writeFileSync(outputFile, result);
+                        }
                     }
                 });
             });
