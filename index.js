@@ -28,6 +28,12 @@ class MinifyHtmlWebpackPlugin {
                 files.forEach(file => {
                     if (!pattern.test(file)) {
                         let inputFile = path.resolve(srcDir, file);
+
+                        const isFile = fs.statSync(inputFile).isFile();
+                        if (!isFile) {
+                            return;
+                        }
+
                         let source = fs.readFileSync(inputFile, 'utf8');
                         if (!contentPattern.test(source)) {
                             let result = minifier(source, this.options.rules);
