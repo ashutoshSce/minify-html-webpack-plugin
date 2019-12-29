@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const minifier = require('html-minifier').minify;
+const path = require('path');
 
 class MinifyHtmlWebpackPlugin {
     constructor(options = {}) {
