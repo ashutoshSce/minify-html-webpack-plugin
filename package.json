@@ -1,6 +1,6 @@
 {
   "name": "minify-html-webpack-plugin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A webpack plugin to minify html file(s) after building",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

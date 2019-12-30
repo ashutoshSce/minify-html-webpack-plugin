@@ -67,7 +67,7 @@ You can pass configuration options to `MinifyHtmlWebpackPlugin`. Each configurat
 
 - `dir`: Optional. Base dir to find the files, if not provided, use the root of webpack context.
 - `src`: Required. source directory path.
-- `dest`: Optional. destination directory path. Paste minified HTML contents from `src` directory files into `dest` directory, if not provided, paste into `src` directory.
+- `dest`: Optional. destination directory path. Paste minified HTML contents from `src` directory files into `dest` directory, if not provided, paste into `src` directory and will be overwritten.
 - `ignoreFileNameRegex`: Optional. Regex Expression to ingnore files in the src directory if it matches with the file name, if not provided, will minimize all files in src directory.`
 - `ignoreFileContentsRegex`: Optional. Regex Expression to ingnore files in the src directory if it matches with the file contents, if not provided, will minimize all files in src directory.`
 - `rules`: Required. See the [html-minifer docs](https://github.com/kangax/html-minifier) for all available options.
