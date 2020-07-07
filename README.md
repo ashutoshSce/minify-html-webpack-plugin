@@ -23,7 +23,9 @@ Add the plugin to your webpack and config as follows:
         plugins: [
             new MinifyHtmlWebpackPlugin({
                 src: './storage/framework/views',
+                dest: './storage/framework/views',
                 rules: {
+                    collapseBooleanAttributes: true,
                     collapseWhitespace: true,
                     removeAttributeQuotes: true,
                     removeComments: true,
@@ -33,6 +35,79 @@ Add the plugin to your webpack and config as follows:
         ]
     };
 ```
+
+Optional Add Search And Replace Rules
+=================
+If need to replace string and then minify it across source files.
+
+```javascript
+    const MinifyHtmlWebpackPlugin = require('minify-html-webpack-plugin');
+    const webpackConfig = {
+        plugins: [
+            new MinifyHtmlWebpackPlugin({
+                src: './storage/framework/views',
+                dest: './storage/framework/views',
+                rules: {
+                    collapseBooleanAttributes: true,
+                    collapseWhitespace: true,
+                    removeAttributeQuotes: true,
+                    removeComments: true,
+                    minifyJS: true,
+                },
+                searchAndReplace: [
+                    {
+                        search: 'search_string', /* The string, or regular expression, that will be replaced by the new value */
+                        replace: 'replace_string' /* The string to replace the search value with */
+                    }
+                ]
+            });
+        ]
+    };
+```
+
+If need to replace array of string with common replace funtions and then minify it across source files.
+
+```javascript
+    const MinifyHtmlWebpackPlugin = require('minify-html-webpack-plugin');
+    const webpackConfig = {
+        plugins: [
+            new MinifyHtmlWebpackPlugin({
+                src: './storage/framework/views',
+                dest: './storage/framework/views',
+                rules: {
+                    collapseBooleanAttributes: true,
+                    collapseWhitespace: true,
+                    removeAttributeQuotes: true,
+                    removeComments: true,
+                    minifyJS: true,
+                },
+                searchAndReplace: [
+                   {
+                        search: './domain',
+                        replace: 'https://original.domain.com'
+                    },
+                    {
+                        /* The array of string value, or regular expression, that will be replaced by the new value returened from replace function */
+                        search: ['./css/app.css', './js/app.js'],
+                        replace: (searchString, index) => {
+                            /* The custom replace logic to replace the search value with */
+
+                            /* Example: Logic to to replace css, js file names with full domain name as prefix and version as suffix to it.
+
+                                    './css/app.css' => 'https://original.domain.com/css/app.css?id=91352d1f26a97b89f271'
+                                    './js/app.js' => 'https://original.domain.com/js/app.js?id=a1f1ae0cfce9bc2d3ce6'
+
+                            */
+                            const content = fs.readFileSync(path.resolve('/real/path/of/file', searchString), 'utf8');
+                            return 'https://original.domain.com' + searchString.substring(1) + '?id=' + md5(content).substr(0, 20);
+                        }
+                    },
+                ]
+            });
+        ]
+    };
+```
+
 
 Laravel Mix Users
 =================
@@ -50,6 +125,7 @@ Paste below snippets into mix.js file.
                 ignoreFileNameRegex: /\.(gitignore|php)$/,
                 ignoreFileContentsRegex: /(<\?xml version)/,
                 rules: {
+                    collapseBooleanAttributes: true,
                     collapseWhitespace: true,
                     removeAttributeQuotes: true,
                     removeComments: true,
@@ -71,6 +147,7 @@ You can pass configuration options to `MinifyHtmlWebpackPlugin`. Each configurat
 - `ignoreFileNameRegex`: Optional. Regex Expression to ingnore files in the src directory if it matches with the file name, if not provided, will minimize all files in src directory.`
 - `ignoreFileContentsRegex`: Optional. Regex Expression to ingnore files in the src directory if it matches with the file contents, if not provided, will minimize all files in src directory.`
 - `rules`: Required. See the [html-minifer docs](https://github.com/kangax/html-minifier) for all available options.
+- `searchAndReplace`: Optional. Array of all search and replace rules. check above examples.
 
 # License
 
