@@ -13,13 +13,13 @@ class MinifyHtmlWebpackPlugin {
         fs.readdir(srcDir, (err, files) => {
             if (err) throw err;
             files.forEach(file => {
-                if (!this.pattern.test(file)) {
+                if (!this.pattern || !this.pattern.test(file)) {
                     let inputFile = path.resolve(srcDir, file);
                     if (fs.statSync(inputFile).isDirectory()) {
                         this.minfifyFiles(inputFile, path.resolve(destDir, file));
                     } else {
                         let source = fs.readFileSync(inputFile, 'utf8');
-                        if (!this.contentPattern.test(source)) {
+                        if (!this.contentPattern || !this.contentPattern.test(source)) {
                             let result = minifier(source, this.options.rules);
                             let outputFile = path.resolve(destDir, file);
                             fs.writeFileSync(outputFile, result);
@@ -48,8 +48,8 @@ class MinifyHtmlWebpackPlugin {
             }
             
             const dest = this.options.dest || this.options.src;
-            this.pattern = this.options.ignoreFileNameRegex || /''/;
-            this.contentPattern = this.options.ignoreFileContentsRegex || /''/;
+            this.pattern = this.options.ignoreFileNameRegex;
+            this.contentPattern = this.options.ignoreFileContentsRegex;
 
             const srcDir = path.resolve(dir, this.options.src);
             const destDir = path.resolve(dir, dest);
