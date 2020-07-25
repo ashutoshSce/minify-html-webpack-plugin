@@ -125,7 +125,7 @@ Paste below snippets into mix.js file.
                 src: './storage/framework/views',
                 dest: './storage/framework/views',
                 ignoreFileNameRegex: /\.(gitignore|php)$/,
-                ignoreFileContentsRegex: /(<\?xml version)/,
+                ignoreFileContentsRegex: /(<\?xml version)|(mail::message)/,
                 rules: {
                     collapseBooleanAttributes: true,
                     collapseWhitespace: true,
