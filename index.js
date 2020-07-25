@@ -47,7 +47,11 @@ class MinifyHtmlWebpackPlugin {
                 if (!this.pattern || !this.pattern.test(file)) {
                     let inputFile = path.resolve(srcDir, file);
                     if (fs.statSync(inputFile).isDirectory()) {
-                        this.minifyFiles(inputFile, path.resolve(destDir, file));
+                        const directory = path.resolve(destDir, file);
+                        if(!fs.existsSync(directory)) {
+                            fs.mkdirSync(directory);
+                        }
+                        this.minifyFiles(inputFile, directory);
                     } else {
                         let source = fs.readFileSync(inputFile, 'utf8');
                         if (!this.contentPattern || !this.contentPattern.test(source)) {
