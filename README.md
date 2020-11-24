@@ -1,5 +1,12 @@
 ## Webpack plugin: minify-html-webpack-plugin
 
+[![npm](https://img.shields.io/npm/v/minify-html-webpack-plugin)](https://www.npmjs.com/package/minify-html-webpack-plugin)
+[![node-current](https://img.shields.io/node/v/minify-html-webpack-plugin)](https://nodejs.org)
+[![npm](https://img.shields.io/npm/dm/minify-html-webpack-plugin)](https://npmcharts.com/compare/minify-html-webpack-plugin?minimal=true)
+[![Build Status](https://travis-ci.org/ashutoshSce/minify-html-webpack-plugin.svg?branch=master)](https://travis-ci.org/ashutoshSce/minify-html-webpack-plugin)
+[![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/ashutoshSce/minify-html-webpack-plugin)](https://github.com/kangax/html-minifier)
+[![NPM](https://img.shields.io/npm/l/minify-html-webpack-plugin)](https://www.npmjs.com/package/minify-html-webpack-plugin)
+
 This is a [webpack](http://webpack.github.io/) plugin that can minimize the HTML with [HTMLMinifier](https://www.npmjs.com/package/html-minifier) for all source directory files and copy into destinations directory during the Webpack build.
 
 Installation
