@@ -6,7 +6,7 @@
 [![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/ashutoshSce/minify-html-webpack-plugin)](https://github.com/kangax/html-minifier)
 [![NPM](https://img.shields.io/npm/l/minify-html-webpack-plugin)](https://www.npmjs.com/package/minify-html-webpack-plugin)
 
-This is a [webpack](http://webpack.github.io/) plugin that can minimize the HTML with [HTMLMinifier](https://www.npmjs.com/package/html-minifier) for all source directory files and copy into destinations directory during the Webpack build.
+This is a [webpack](http://webpack.github.io/) plugin that can minimize the HTML with [HTMLMinifier](https://www.npmjs.com/package/html-minifier) for all source directory files and copy into destinations directory recursively iterating through all subfolders and files during the Webpack build.
 
 Installation
 ============
@@ -44,7 +44,7 @@ Add the plugin to your webpack and config as follows:
 
 Optional Add Search And Replace Rules
 =================
-If need to replace string and then minify it across source files.
+If need to replace strings and then do minification across all source files in directoris and sub-directories.
 
 ```javascript
     const MinifyHtmlWebpackPlugin = require('minify-html-webpack-plugin');
@@ -62,8 +62,10 @@ If need to replace string and then minify it across source files.
                 },
                 searchAndReplace: [
                     {
-                        search: 'search_string', /* The string, or regular expression, that will be replaced by the new value */
-                        replace: 'replace_string' /* The string to replace the search value with */
+                        /* The string, or regular expression, that will be replaced by the new value */
+                        search: 'search_string',
+                        /* The string to replace the search value with */
+                        replace: 'replace_string' 
                     }
                 ]
             });
@@ -71,7 +73,7 @@ If need to replace string and then minify it across source files.
     };
 ```
 
-If need to replace array of string with common replace funtions and then minify it across source files.
+If need to replace array of string with common replace funtions and then minify it across source files and sub-directories.
 
 ```javascript
     const MinifyHtmlWebpackPlugin = require('minify-html-webpack-plugin');
@@ -118,7 +120,7 @@ If need to replace array of string with common replace funtions and then minify 
 
 Laravel Mix Users
 =================
-Paste below snippets into mix.js file.
+Paste below snippets into webpack.mix.js file.
 
 ```javascript
     const MinifyHtmlWebpackPlugin = require('minify-html-webpack-plugin');
