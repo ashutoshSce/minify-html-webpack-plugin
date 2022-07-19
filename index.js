@@ -74,6 +74,11 @@ class MinifyHtmlWebpackPlugin {
         }
 
         const dir = this.options.dir || this.root;
+        if (!dir) {
+            console.error("Either missing base `dir` to find the files or the root of webpack context not provided.")
+            return;
+        }
+
 
         if (!this.options.src) {
             throw new Error('`src` is missing from the options.')
@@ -103,13 +108,19 @@ class MinifyHtmlWebpackPlugin {
             const afterBuild = this.options.afterBuild || false;
             this.root = compilation.options.context;
             if (!afterBuild) {
+                if (Array.isArray(compilation.errors) && compilation.errors.length > 0) {
+                    return;
+                }
                 this.process();
             }
         });
 
-        compiler.hooks.done.tap('MinifyHtmlWebpackPluginAfterBuild', compilation => {
+        compiler.hooks.done.tap('MinifyHtmlWebpackPluginAfterBuild', stats => {
             const afterBuild = this.options.afterBuild || false;
             if (afterBuild) {
+                if (stats && stats.compilation && Array.isArray(stats.compilation.errors) && stats.compilation.errors.length > 0) {
+                    return;
+                }
                 this.process();
             }
         })
